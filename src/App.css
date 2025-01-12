@@ -1,8 +1,88 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.deleteButton {
+  margin: 10px;
+}
+
+.deleteButton:hover {
+  text-decoration: underline;
+  background-color:rgba(255, 38, 0, 0.8)
+}
+
+body {
+  background-color:rgb(58, 125, 49);
+  background-position: center;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
+.playerList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+background-image: url("green-vertical-stripes.jpg");
+}
 
+.playerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgb(48, 0, 205);
+  background-size: cover;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(158, 209, 150);
+  padding: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.playerCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px 2px rgba(111, 0, 255, 0.8);
+  cursor: pointer;
+}
+
+button {
+  cursor: pointer;
+}
+
+input {
+  margin: 15px;
+}
+
+.playerImage {
+  width: 100px;
+  height: 100px;
+  object-fit: cover; 
+  position: relative;
+  border-radius: 10px;
+}
+
+.header {
+  padding: 20px;
+  background-image: url("https://static.vecteezy.com/system/resources/previews/016/128/944/original/superbowl-american-football-stadium-background-in-night-sky-free-vector.jpg");
+  background-size:100vw;
+  
+}
+
+.newPlayerForm {
+  display: inline-block;
+  position: relative;
+  justify-content: space-between;
+  background-color: darkslateblue;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.playerNav {
+  display: inline-block;
+  
+}
