@@ -1,45 +1,45 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 
-export default function PlayerList({
-  players,
-  setSelectedPlayerId,
-  onPlayerDeleted,
-}) {
+export default function PlayerList({ players, onPlayerDeleted }) {
+  
 
   return (
-    
-    <div className="playerList">
-      {players.map((player) => (
-        <div
-          key={player.id}
-          className="playerCard"
-          onClick={() => setSelectedPlayerId(player.id)}
-        >
-          <h3>{player.name}</h3>
-          <img
-            className="playerImage"
-            src={player.imageUrl}
-            alt={`${player.name}`}
-          />
-          <button
-            className="deleteButton"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (
-                window.confirm(
-                  `Are you sure you want to remove ${player.name}?`
-                )
-              ) {
-                onPlayerDeleted(player.id);
-              }
-            }}
+    <>
+      <h2>Current Players:</h2>
+      <h3>Click on a puppy&apos;s name for more info!</h3>
+      <div className="playerList">
+        {players.map((player) => (
+          <div
+            key={player.id}
+            className="playerCard"
           >
-            Remove Player
-          </button>
-        </div>
-      ))}
-    </div>
-    
+            <Link className="nameLink" to={`/players/${player.id}`}>
+            {player.name}
+            </Link>
+            <img
+              className="playerImage"
+              src={player.imageUrl}
+              alt={`${player.name}`}
+            />
+            <a
+              className="deleteButton"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (
+                  window.confirm(
+                    `Are you sure you want to remove ${player.name}?`
+                  )
+                ) {
+                  onPlayerDeleted(player.id);
+                }
+              }}
+            >
+              Remove Player
+            </a>
+          </div>
+        ))}
+      </div>
+    </>
   );
-  
 }

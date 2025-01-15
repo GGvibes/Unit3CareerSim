@@ -1,15 +1,14 @@
-/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import "./App.css";
 import PlayerList from "./components/PlayerList";
 import SelectedPlayer from "./components/SelectedPlayer";
 import NewPlayerForm from "./components/NewPlayerForm";
+import { Routes, Route } from "react-router-dom";
 
 const API_URL = "https://fsa-puppy-bowl.herokuapp.com/api/2409-GHP-ET-WEB-PT";
 
 export default function App() {
   const [players, setPlayers] = useState([]);
-  const [selectedPlayerId, setSelectedPlayerId] = useState(null);
 
   useEffect(() => {
     async function fetchPlayers() {
@@ -56,20 +55,16 @@ export default function App() {
     <>
       <h1 className="header">Puppy Bowl</h1>
       <NewPlayerForm onPlayerAdded={handlePlayerAdded} />
-      {selectedPlayerId ? (
-        <div>
-          <SelectedPlayer
-            setSelectedPlayerId={setSelectedPlayerId}
-            selectedPlayerId={selectedPlayerId}
-          ></SelectedPlayer>
-        </div>
-      ) : (
-        <PlayerList
-          players={players}
-          setSelectedPlayerId={setSelectedPlayerId}
-          onPlayerDeleted={handlePlayerDeleted}
-        />
-      )}
+      <div>
+        <Routes>
+          <Route path="/" element={<PlayerList players={players} onPlayerDeleted={handlePlayerDeleted}/>}></Route>
+          <Route
+            path="/players/:id"
+            element={<SelectedPlayer players={players} />}
+          ></Route>
+        </Routes>
+      </div>
+      
     </>
   );
 }

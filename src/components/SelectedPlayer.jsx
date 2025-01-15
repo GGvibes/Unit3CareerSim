@@ -1,40 +1,29 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
 
-const API_URL = "https://fsa-puppy-bowl.herokuapp.com/api/2409-GHP-ET-WEB-PT";
+import { useParams, useNavigate } from 'react-router-dom'
+
 
 export default function SelectedPlayer({
-  selectedPlayerId,
-  setSelectedPlayerId,
+  players
 }) {
-  const [player, setPlayer] = useState(null);
+  
+  const navigate=useNavigate();
+  const { id } = useParams();
+  const player = players.find((p) => p.id === parseInt(id))
   console.log("Player: ", player);
 
-  useEffect(() => {
-    async function fetchSelectedPlayer() {
-      try {
-        const response = await fetch(`${API_URL}/players/${selectedPlayerId}`);
-        const result = await response.json();
-        setPlayer(result);
-      } catch (error) {
-        console.error("Error fetching player: ", error);
-      }
-    }
-    fetchSelectedPlayer();
-  }, [selectedPlayerId]);
-
   return (
-    <div>
-      <tr>
-        <td>{player.name}</td>
-        <td>{player.breed}</td>
-        <td>{player.imageUrl}</td>
-      </tr>
+    <div className='singlePlayerCard'>
+      
+        <h1>{player.name}</h1>
+        <h3>{player.breed}</h3>
+        <img className="singlePlayerImg" src={player.imageUrl} alt={player.name}></img>
+      
       <button
-        onClick={() => setSelectedPlayerId(null)}
+        onClick={() => {navigate("/")}}
         style={{ marginTop: "20px" }}
       >
-        Back to Contact List
+        Back to Player List
       </button>
     </div>
   );
